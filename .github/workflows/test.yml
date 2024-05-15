@@ -59,7 +59,7 @@ jobs:
       run: |
           docker images
           logsPath=$(find . -name "console.log");
-          < "$logsPath" sudo grep Launching
+          sudo cat "$logsPath" | sudo grep Launching
     - name: Archive server logs if failed
       if: failure()
       uses: actions/upload-artifact@v2
