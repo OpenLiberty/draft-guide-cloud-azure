@@ -124,7 +124,7 @@ include::{common-includes}/gitclone.adoc[]
 
 // no "try what you'll build" section in this guide because it would be too long due to all setup the user will have to do.
 
-== Use IBM Liberty on AKS tool to provision a resource group, container registry and Kubernetes cluster
+== Provision deployment foundation with IBM Liberty on AKS 
 
 === Creating a resource group
 
