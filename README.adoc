@@ -124,7 +124,7 @@ include::{common-includes}/gitclone.adoc[]
 
 // no "try what you'll build" section in this guide because it would be too long due to all setup the user will have to do.
 
-=== Use IBM Liberty on AKS tool to provision a resource group, container registry and Kubernetes cluster
+== Use IBM Liberty on AKS tool to provision a resource group, container registry and Kubernetes cluster
 
 === Creating a resource group
 
@@ -165,9 +165,11 @@ Select **Review + create** button to validate your setup. Once you complete the 
 // Uploading images to a container registry
 // =================================================================================================
 
-When deployment process complete, check the created resource group and locate the container registry created during the deployment. The name of the Container Registry will be used in `[registry-name]`.
+Upon completion of the deployment process, navigate to the resource group overview page in the Azure Portal. Review the created resource group and search for resources of the type `Container registry`. Locate the container registry that was created during the deployment. The name of the Container Registry will be used in `[registry-name]`.
 
 image::Locate_ACR.png[Locate ACR,align="center"]
+
+== Uploading images to a container registry
 
 === Logging into the container registry
 
@@ -185,8 +187,6 @@ Once you log in, you will see the following message:
 Login Succeeded
 ----
 
-
-== Uploading images to a container registry
 
 === Building your Docker images
 
@@ -271,7 +271,7 @@ docker push [registry-server]/inventory:1.0-SNAPSHOT
 
 To locate the created Kubernetes cluster, go to the resource group overview page in the Azure Portal. Look for resources of type `Kubernetes service` and find the cluster with a name in the format `clusterXXXXXX`. Replacing `[cluster-name]` with the name of the cluster.
 
-
+image::Locate_created_cluster.png[Locate created cluster,align="center"]
 
 Merge the credentials of your cluster into your current Kubernetes configuration by using the `az aks get-credentials` command. 
 The default Kubernetes configuration file that is updated with your cluster credentials is located within the `~/.kube/config` filepath. 
