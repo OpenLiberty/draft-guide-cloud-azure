@@ -1,4 +1,4 @@
-// Copyright (c) 2019, 2023 IBM Corporation and others.
+// Copyright (c) 2019, 2024 IBM Corporation and others.
 // Licensed under Creative Commons Attribution-NoDerivatives
 // 4.0 International (CC BY-ND 4.0)
 //   https://creativecommons.org/licenses/by-nd/4.0/
@@ -56,13 +56,9 @@ A cloud-based infrastructure enables you to focus on developing your microservic
 without worrying about low-level infrastructure details for deployment. Using a cloud helps
 you to easily scale and manage your microservices in a high-availability setup.
 
-Azure offers a managed {kube} service called Azure Kubernetes Service (AKS). Using AKS simplifies the process of running Kubernetes on Azure without 
-needing to install or maintain your own Kubernetes control plane. It provides a hosted {kube} 
-cluster that you can deploy your microservices to. You will use AKS with an Azure
-Container Registry (ACR). ACR is a private registry that is used to store 
-and distribute your container images. Note, because AKS is not free a small
-cost is associated with running this guide. See the official
-https://azure.microsoft.com/en-us/pricing/details/kubernetes-service/[AKS pricing^] documentation for more details.
+Azure offers a managed {kube} service called Azure Kubernetes Service (AKS). Using AKS simplifies the process of running Kubernetes on Azure without needing to install or maintain your own Kubernetes control plane. It provides a hosted {kube} cluster that you can deploy your microservices to. You will use AKS with an Azure Container Registry (ACR). ACR is a private registry that is used to store and distribute your container images. Note, because AKS is not free a small cost is associated with running this guide. See the official https://azure.microsoft.com/en-us/pricing/details/kubernetes-service/[AKS pricing^] documentation for more details.
+
+This guide will introduce IBM WebSphere Liberty and Open Liberty on AKS, which solution automates the majority of standard steps involved in provisioning WebSphere Liberty or Open Liberty on an AKS cluster. Once the initial provisioning process is complete, you are free to customize deployments further.
 
 The two microservices you will deploy are called `system` and `inventory`. 
 The `system` microservice returns the JVM system properties of the running container. 
@@ -87,10 +83,14 @@ If you already have Docker installed, make sure to have it running.
 https://azure.microsoft.com/en-us/pricing/purchase-options/pay-as-you-go/[Microsoft Azure Purchase Options^] 
 to create an account with your email and start a Pay-As-You-Go subscription. 
 
+* *IBM WebSphere Liberty and Open Liberty on AKS:* You will need to use the IBM WebSphere Liberty and Open Liberty on AKS on Azure marketplace. See the official
+https://learn.microsoft.com/en-us/azure/aks/howto-deploy-java-liberty-app?tabs=in-bash#create-a-liberty-on-aks-deployment-using-the-portal[Create a Liberty on AKS deployment using the portal^] documentation for more information. Or, you can go directly to https://aka.ms/liberty-aks[the offer]. 
+
 * *Azure CLI:* You will need to use the Azure Command Line Interface (CLI). See the official
 https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest[Install the Azure CLI^]
 documentation for information about setting up the Azure CLI for your platform. 
 To verify that the Azure CLI is installed correctly, run the following command:
+
 
 +
 [role=command]
@@ -123,130 +123,53 @@ include::{common-includes}/gitclone.adoc[]
 
 // no "try what you'll build" section in this guide because it would be too long due to all setup the user will have to do.
 
-// =================================================================================================
-// Managing an Azure Container Registry
-// =================================================================================================
-
-== Managing an Azure Container Registry
-
-To deploy your microservices, you need to create an Azure Container Registry in the same location 
-where your services are deployed, and link the registry to a resource group. Your registry will manage container instances 
-that will be deployed to a Kubernetes cluster.
+=== Use IBM Liberty on AKS tool to provision a resource group, container registry and Kubernetes cluster
 
 === Creating a resource group
 
+A resource group is an Azure construct to manage a logical collection of resources for your cloud deployments on Azure. You must create a new resource group to manage the resources you need for your Kubernetes deployment.
 
-A resource group is an Azure construct to manage a logical collection of resources for your cloud deployments on Azure. 
-You must create a new resource group to manage the resources you need for your Kubernetes deployment.
+To create the resource group in an efficient way, check out the [IBM Liberty on AKS]https://aka.ms/liberty-aks tool and click on the `Create` button to start the process. 
 
-To create a resource group, an Azure location must be specified. The metadata for your resources are stored at this specified Azure location. 
-If resources are created later without specifying a location, these new resources run in the
-same region that you specified for creating a resource group. 
+On the `Basics` pane. Under the `Resource group`, select `Create new` and type in **guideGroup** as the name of the resource group.
 
-See the list of available Azure regions for your Azure subscription:
+image::AKS_tool_create_resource_group.png[AKS tool create resource group,align="center"]
 
-[role=command]
-```
-az account list-locations -o table
-```
-
-You will see an output similar to the following:
-
-[role="no_copy"]
-----
-DisplayName          Latitude    Longitude    Name
--------------------  ----------  -----------  ------------------
-Central US           41.5908     -93.6208     centralus
-East US              37.3719     -79.8164     eastus
-East US 2            36.6681     -78.3889     eastus2
-West US              37.783      -122.417     westus
-North Central US     41.8819     -87.6278     northcentralus
-South Central US     29.4167     -98.5        southcentralus
-Canada Central       43.653      -79.383      canadacentral
-Canada East          46.817      -71.217      canadaeast
-UK South             50.941      -0.799       uksouth
-UK West              53.427      -3.084       ukwest
-West Central US      40.890      -110.234     westcentralus
-West US 2            47.233      -119.852     westus2
-----
-
-The `name` column specifies the region name that you use to create your resource group.
+An Azure location must be specified. The metadata for your resources are stored at this specified Azure location. If resources are created later without specifying a location, these new resources will run in the same region that you specified for creating a resource group. Click on the `Region` drop down menu and select the desired location.
 
 However, AKS is not available in all regions. Make sure that the region you select is 
 https://azure.microsoft.com/en-us/global-infrastructure/services/?products=kubernetes-service[compatible with AKS^].
 
-Create a resource group using the `az group create` command. Remember to replace `[location]` with a region 
-that is available for your subscription and compatible with AKS.
+Crete and environment variable in your shell for the resource group names for the cluster and the database:
+include::{common-includes}/os-tabs.adoc[]
 
-[role=command]
-```
-az group create -l [location] -n guideGroup
-```
+=== Creating a container registry and an AKS cluster
 
-You will see an output similar to the following:
+Once finish setting up the resource group, click on `Next` and move on to the `AKS` pane. 
 
-[role="no_copy"]
-```
-{
-  "id": "/subscriptions/[subscription-id]/resourceGroups/guideGroup",
-  "location": "[location]",
-  "managedBy": null,
-  "name": "guideGroup",
-  "properties": {
-    "provisioningState": "Succeeded"
-  },
-  "tags": null,
-  "type": null
-}
-```
+To deploy your microservices, you need to create an Azure Container Registry in the same location where your services are deployed and link it to a resource group if using command line. However, when leveraging the IBM Liberty on AKS, this linkage will be automatically setup during the process. The created registry will manage container instances that will be deployed to a Kubernetes cluster. 
 
-=== Creating a container registry
+You will also need to create a AKS Cluster which helps to host the containerized applications which managed by Kubernetes on the Azure.
 
-Your private container registry manages Docker images that you build in later steps. 
-With the Azure `az acr` command, create an Azure Container Registry.
-Replace `[registry-name]` with a container registry name that is unique within Azure and
-contains 5-50 alphanumeric characters. You can check whether a registry name already exists by
-using the `az acr check-name -n [registry-name]` command.
+In the `AKS` pane, you can optionally select an existing AKS cluster and container registry instance. You can also adjust the settings for the size and number of the virtual machines in the AKS node pool.
 
-[role=command]
-```
-az acr create -g guideGroup -n [registry-name] --sku Basic --admin-enabled
-```
+From this guide's perspective, you can keep all the defaults on the pane as shown below, and the tool will create a new AKS cluster and a container registry instance. 
 
-In the `az acr create` command, the `-g` option specifies the resource group to designate to the container registry. 
-You created this resource group before as `guideGroup`. The `-n` option specifies the name of the
-container registry to be created, which is defined as `[registry-name]`. The `--admin-enabled` flag indicates that the admin user is enabled. 
+image::Create_AKS_and_ACR.png[Create AKS and ACR,align="center"]
 
-The possible Stock Keeping Unit (SKU) values that can be passed into the `--sku` option are `Basic`, `Standard`, and `Premium`.
-These different SKU options provide pricing for various levels of capacity and usage. You use a Basic SKU because it is cheaper 
-and the services you deploy have low storage and throughput requirements.
+=== Finishing the creations
 
-You will see an output similar to the following:
+For pane `Load balancing` and `Operator and application`, you can keep the default option in this guide. For more information about the configuration in these two panes, please visit the documentation of [Create a Liberty on AKS deployment using the portal]https://learn.microsoft.com/en-us/azure/aks/howto-deploy-java-liberty-app?tabs=in-bash#create-a-liberty-on-aks-deployment-using-the-portal
 
-[role="no_copy"]
-```
-{
-  "adminUserEnabled": true,
-  "creationDate": "2019-06-05T20:28:09.637994+00:00",
-  "id": "/subscriptions/[subscription-id]/resourceGroups/guideGroup/providers/Microsoft.ContainerRegistry/registries/[registry-name]",
-  "location": "[location]",
-  "loginServer": "[registry-name].azurecr.io",
-  "name": "[registry-name]",
-  "networkRuleSet": null,
-  "provisioningState": "Succeeded",
-  "resourceGroup": "guideGroup",
-  "sku": {
-    "name": "Basic",
-    "tier": "Basic"
-  },
-  "status": null,
-  "storageAccount": null,
-  "tags": {},
-  "type": "Microsoft.ContainerRegistry/registries"
-}
-```
-In the output, the value for `loginServer` is the server name for your container registry,
-which is `[registry-name].azurecr.io`, with all lowercase letters.
+Select **Review + create** button to validate your setup. Once you complete the review and the validation process, select the **Create** button to initiate the deployment process, which may take up to 20 minutes to complete.
+
+// =================================================================================================
+// Uploading images to a container registry
+// =================================================================================================
+
+When deployment process complete, check the created resource group and locate the container registry created during the deployment. The name of the Container Registry will be used in `[registry-name]`.
+
+image::Locate_ACR.png[Locate ACR,align="center"]
 
 === Logging into the container registry
 
@@ -264,10 +187,6 @@ Once you log in, you will see the following message:
 Login Succeeded
 ----
 
-
-// =================================================================================================
-// Uploading images to a container registry
-// =================================================================================================
 
 == Uploading images to a container registry
 
@@ -340,48 +259,35 @@ docker push [registry-server]/inventory:1.0-SNAPSHOT
 ```
 
 // =================================================================================================
-// Creating a Kubernetes cluster on AKS
+// Access the created cluster
 // =================================================================================================
 
-== Creating a Kubernetes cluster on AKS
+== Access the created cluster
 
-=== Provisioning a cluster
+=== Merge the cluster credentials into the current Kubernetes configuration
 
-To create your AKS cluster, use the `az aks create` cluster command. 
-When the cluster is created, the command outputs information about the cluster.
-You might need to wait while your cluster is being created.
+// An AKS cluster requires a service principal, which is an identity that is used to represent a resource in Azure that can be assigned roles and permissions to interact with other resources and the Azure API. The `az aks create` command automatically generates a service principal to use with your newly created cluster.Optionally, you can https://docs.microsoft.com/en-us/azure/aks kubernetes-service-principal#manually-create-a-service-principal[manually create a service principal^]yourself and create a cluster with this new service principal.However, to run this command, your Azure account must have permission access to create service principals. 
 
-[role=command]
-```
-az aks create -g guideGroup -n guideCluster
-```
+// service principal is being replace by a Managed identity: use the command to find service principle and identity `az aks show --name cluster-name --resource-group resource-group name`
+// =================================================================================================
 
-Running this command creates an AKS cluster that is called `guideCluster` with the resource group
-`guideGroup`.
+To locate the created Kubernetes cluster, go to the resource group overview page in the Azure Portal. Look for resources of type `Kubernetes service` and find the cluster with a name in the format `clusterXXXXXX`. Use the name of the cluster as the value replacing the `[cluster-name]`.
 
-The option `--node-count -c` can also be added to this `az aks create` command to create a cluster
-with a certain number of nodes in the Kubernetes node pool. By default, if this option is excluded,
-three nodes are assigned to the node pool.
 
-An AKS cluster requires a service principal, which is an identity that is used to represent a resource in Azure that 
-can be assigned roles and permissions to interact with other resources and the Azure API. The `az aks create` command automatically generates 
-a service principal to use with your newly created cluster. 
-Optionally, you can https://docs.microsoft.com/en-us/azure/aks/kubernetes-service-principal#manually-create-a-service-principal[manually create a service principal^] yourself and create a cluster with this new service principal.
-However, to run this command, your Azure account must have permission access to create service principals. 
 
 Merge the credentials of your cluster into your current Kubernetes configuration by using the `az aks get-credentials` command. 
 The default Kubernetes configuration file that is updated with your cluster credentials is located within the `~/.kube/config` filepath. 
 
 [role=command]
 ```
-az aks get-credentials -g guideGroup -n guideCluster
+az aks get-credentials -g guideGroup -n [cluster-name]
 ```
 
 You will see an output similar to the following:
 
 [role="no_copy"]
 ----
-Merged "guideCluster" as current context in /Users/.kube/config
+Merged created cluster" as current context in /Users/.kube/config
 ----
 
 Run the following command to check the status of the available nodes in your AKS cluster:
