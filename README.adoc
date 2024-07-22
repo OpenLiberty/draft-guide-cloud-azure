@@ -11,7 +11,7 @@
 :page-duration: 1 hour
 :page-releasedate: 2019-08-13
 :page-description: Explore how to deploy microservices to Azure Kubernetes Service (AKS).
-:page-tags: ['Kubernetes', 'Docker', 'Cloud']
+:page-tags: ['kubernetes', 'docker', 'cloud']
 :page-permalink: /guides/{projectid}
 :page-related-guides: ['kubernetes-intro', 'kubernetes-microprofile-config', 'kubernetes-microprofile-health']
 :common-includes: https://raw.githubusercontent.com/OpenLiberty/guides-common/prod
@@ -56,7 +56,7 @@ A cloud-based infrastructure enables you to focus on developing your microservic
 without worrying about low-level infrastructure details for deployment. Using a cloud helps
 you to easily scale and manage your microservices in a high-availability setup.
 
-Azure offers a managed {kube} service called Azure Kubernetes Service (AKS). Using AKS simplifies the process of running Kubernetes on Azure without needing to install or maintain your own Kubernetes control plane. It provides a hosted {kube} cluster that you can deploy your microservices to. You will use AKS with an Azure Container Registry (ACR). ACR is a private registry that is used to store and distribute your container images. Note, because AKS is not free a small cost is associated with running this guide. See the official https://azure.microsoft.com/en-us/pricing/details/kubernetes-service/[AKS pricing^] documentation for more details.
+Azure offers a managed {kube} service called Azure Kubernetes Service (AKS). Using AKS simplifies the process of running Kubernetes on Azure without needing to install or maintain your own Kubernetes control plane. It provides a hosted {kube} cluster that you can deploy your microservices to. You will use AKS with an Azure Container Registry (ACR). ACR is a private registry that is used to store and distribute your container images. Note, because AKS is not free, a small cost may associated with running this guide. See the official https://azure.microsoft.com/en-us/pricing/details/kubernetes-service/[AKS pricing^] documentation for more details.
 
 This guide will introduce IBM WebSphere Liberty and Open Liberty on AKS, which solution automates the majority of standard steps involved in provisioning WebSphere Liberty or Open Liberty on an AKS cluster. Once the initial provisioning process is complete, you are free to customize deployments further.
 
