@@ -280,7 +280,7 @@ You will see an output similar to the following:
 
 [role="no_copy"]
 ----
-Merged created cluster" as current context in /Users/.kube/config
+Merged [cluster-name] as current context in /Users/.kube/config
 ----
 
 Run the following command to check the status of the available nodes in your AKS cluster:
