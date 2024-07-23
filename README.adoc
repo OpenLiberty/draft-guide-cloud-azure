@@ -45,7 +45,7 @@ Explore how to deploy microservices to Azure Kubernetes Service (AKS) on Microso
 == What you'll learn
 
 You will learn how to deploy two microservices in Open Liberty containers to a {kube} cluster on
-Azure Kubernetes Service (AKS).
+**Azure Kubernetes Service** (AKS).
 
 Kubernetes is an open source container orchestrator that automates many tasks involved in 
 deploying, managing, and scaling containerized applications. If you would like to learn
@@ -57,9 +57,9 @@ A cloud-based infrastructure enables you to focus on developing your microservic
 without worrying about low-level infrastructure details for deployment. Using a cloud helps
 you to easily scale and manage your microservices in a high-availability setup.
 
-Azure offers a managed {kube} service called Azure Kubernetes Service (AKS). Using AKS simplifies the process of running Kubernetes on Azure without needing to install or maintain your own Kubernetes control plane. It provides a hosted {kube} cluster that you can deploy your microservices to. You will use AKS with an Azure Container Registry (ACR). ACR is a private registry that is used to store and distribute your container images. Note, because AKS is not free, a small cost may associated with running this guide. See the official https://azure.microsoft.com/en-us/pricing/details/kubernetes-service/[AKS pricing^] documentation for more details.
+Azure offers a managed {kube} service called **Azure Kubernetes Service** (AKS). Using AKS simplifies the process of running Kubernetes on Azure without needing to install or maintain your own Kubernetes control plane. It provides a hosted {kube} cluster that you can deploy your microservices to. You will use AKS with an **Azure Container Registry** (ACR). ACR is a private registry that is used to store and distribute your container images. Note, because AKS is not free, a cost may associated with running this guide. See the official https://azure.microsoft.com/en-us/pricing/details/kubernetes-service/[AKS pricing^] documentation for more details.
 
-This guide will introduce IBM WebSphere Liberty and Open Liberty on AKS, which solution automates the majority of standard steps involved in provisioning WebSphere Liberty or Open Liberty on an AKS cluster. Once the initial provisioning process is complete, you are free to customize deployments further.
+This guide will introduce **IBM WebSphere Liberty and Open Liberty on AKS**, which solution automates the majority of standard steps involved in provisioning WebSphere Liberty or Open Liberty on an AKS cluster. Once the initial provisioning process is complete, you are free to customize deployments further.
 
 The two microservices you will deploy are called `system` and `inventory`. 
 The `system` microservice returns the JVM system properties of the running container. 
@@ -132,7 +132,7 @@ A resource group is an Azure construct to manage a logical collection of resourc
 
 To create the resource group in an efficient way, check out the https://aka.ms/liberty-aks[IBM Liberty on AKS] tool and click on the `Create` button to start the process. 
 
-On the `Basics` pane. Under the `Resource group`, select `Create new` and type in **guideGroup** as the name of the resource group.
+On the `Basics` pane. Under the `Resource group`, select `Create new` and type in **guideGroup** as the name of the resource group. Please note, the offer also supports to use an existing resource group while the group is required to be empty. 
 
 image::AKS_tool_create_resource_group.png[AKS tool create resource group,align="center"]
 
@@ -147,7 +147,7 @@ Once finish setting up the resource group, click on `Next` and move on to the `A
 
 To deploy your microservices, you need to create an Azure Container Registry in the same location where your services are deployed and link it to a resource group if using command line. However, when leveraging the `IBM Liberty on AKS`, this linkage will be automatically setup during the process. The created registry will manage container instances that will be deployed to a Kubernetes cluster. 
 
-You will also need to create a AKS Cluster which helps to host the containerized applications which managed by Kubernetes on the Azure.
+Additionally, you will need to create an AKS Cluster, which is used to host containerized applications managed by Kubernetes on Azure.
 
 In the `AKS` pane, you can optionally select an existing AKS cluster and container registry instance. You can also adjust the settings for the size and number of the virtual machines in the AKS node pool.
 
@@ -213,8 +213,8 @@ Run the following commands to build and containerize the application:
 
 [role='command']
 ```
-docker build -t system:1.0-SNAPSHOT system/.
-docker build -t inventory:1.0-SNAPSHOT inventory/.
+docker build --platform linux/amd64 -t system:1.0-SNAPSHOT system/.
+docker build --platform linux/amd64 -t inventory:1.0-SNAPSHOT inventory/.
 ```
 
 To verify that the images are built, run the `docker images` command to list all local Docker images:
@@ -264,11 +264,6 @@ docker push [registry-server]/inventory:1.0-SNAPSHOT
 
 === Merge the cluster credentials into the current Kubernetes configuration
 
-// An AKS cluster requires a service principal, which is an identity that is used to represent a resource in Azure that can be assigned roles and permissions to interact with other resources and the Azure API. The `az aks create` command automatically generates a service principal to use with your newly created cluster.Optionally, you can https://docs.microsoft.com/en-us/azure/aks kubernetes-service-principal#manually-create-a-service-principal[manually create a service principal^]yourself and create a cluster with this new service principal.However, to run this command, your Azure account must have permission access to create service principals. 
-
-// service principal is being replace by a Managed identity: use the command to find service principle and identity `az aks show --name cluster-name --resource-group resource-group name`
-// =================================================================================================
-
 To locate the created Kubernetes cluster, go to the resource group overview page in the Azure Portal. Look for resources of type `Kubernetes service` and find the cluster with a name in the format `clusterXXXXXX`. Replacing `[cluster-name]` with the name of the cluster.
 
 image::Locate_created_cluster.png[Locate created cluster,align="center"]
@@ -295,15 +290,12 @@ Run the following command to check the status of the available nodes in your AKS
 kubectl get nodes
 ```
 
-The `kubectl get nodes` command outputs information about three nodes, as the cluster was created with the default number of nodes in a node pool.
-The `STATUS` of each node is in the `Ready` state. 
+The `kubectl get nodes` command outputs information about the node. Please ensure that the `STATUS' of the node is in the `Ready' state before proceeding with the subsequent steps. 
 
 [role="no_copy"]
 ----
-NAME                       STATUS   ROLES   AGE     VERSION
-aks-nodepool1-21407934-0   Ready    agent   2m25s   v1.12.8
-aks-nodepool1-21407934-1   Ready    agent   2m48s   v1.12.8
-aks-nodepool1-21407934-2   Ready    agent   2m34s   v1.12.8
+NAME                                STATUS   ROLES   AGE   VERSION
+aks-agentpool-39342667-vmss000000   Ready    agent   20h   v1.28.10
 ----
 
 === Storing registry credentials in a secret
