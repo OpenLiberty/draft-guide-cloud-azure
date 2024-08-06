@@ -59,7 +59,7 @@ you to easily scale and manage your microservices in a high-availability setup.
 
 Azure offers a managed {kube} service called **Azure Kubernetes Service** (AKS). Using AKS simplifies the process of running Kubernetes on Azure without needing to install or maintain your own Kubernetes control plane. It provides a hosted {kube} cluster that you can deploy your microservices to. You will use AKS with an **Azure Container Registry** (ACR). ACR is a private registry that is used to store and distribute your container images. Note, because AKS is not free, a cost may associated with running this guide. See the official https://azure.microsoft.com/en-us/pricing/details/kubernetes-service/[AKS pricing^] documentation for more details.
 
-This guide will introduce **IBM WebSphere Liberty and Open Liberty on AKS**, which solution automates the majority of standard steps involved in provisioning WebSphere Liberty or Open Liberty on an AKS cluster. Once the initial provisioning process is complete, you are free to customize deployments further.
+This guide will introduce **IBM WebSphere Liberty and Open Liberty on AKS** plan, which solution automates the majority of standard steps involved in provisioning WebSphere Liberty or Open Liberty on an AKS cluster. Once the initial provisioning process is complete, you are free to customize deployments further.
 
 The two microservices you will deploy are called `system` and `inventory`. 
 The `system` microservice returns the JVM system properties of the running container. 
@@ -84,7 +84,7 @@ If you already have Docker installed, make sure to have it running.
 https://azure.microsoft.com/en-us/pricing/purchase-options/pay-as-you-go/[Microsoft Azure Purchase Options^] 
 to create an account with your email and start a Pay-As-You-Go subscription. 
 
-* *IBM WebSphere Liberty and Open Liberty on AKS:* You will need to use the IBM WebSphere Liberty and Open Liberty on AKS on Azure marketplace. See the official
+* *IBM WebSphere Liberty and Open Liberty on AKS:* You will need to use the IBM WebSphere Liberty and Open Liberty on AKS plan on Azure marketplace. See the official
 https://learn.microsoft.com/en-us/azure/aks/howto-deploy-java-liberty-app?tabs=in-bash#create-a-liberty-on-aks-deployment-using-the-portal[Create a Liberty on AKS deployment using the portal^] documentation for more information. Or, you can go directly to https://aka.ms/liberty-aks[the offer]. 
 
 * *Azure CLI:* You will need to use the Azure Command Line Interface (CLI). See the official
@@ -124,15 +124,15 @@ include::{common-includes}/gitclone.adoc[]
 
 // no "try what you'll build" section in this guide because it would be too long due to all setup the user will have to do.
 
-== Provision deployment foundation with IBM Liberty on AKS 
+== Provision deployment foundation with Liberty on AKS 
 
 === Creating a resource group
 
 A resource group is an Azure construct to manage a logical collection of resources for your cloud deployments on Azure. You must create a new resource group to manage the resources you need for your Kubernetes deployment.
 
-To create the resource group in an efficient way, check out the https://aka.ms/liberty-aks[IBM Liberty on AKS] tool and click on the `Create` button to start the process. 
+To create the resource group in an efficient way, check out the https://aka.ms/liberty-aks[IBM WebSphere Liberty and Open Liberty on AKS] plan and click on the `Create` button to start the process. 
 
-On the `Basics` pane. Under the `Resource group`, select `Create new` and type in **guideGroup** as the name of the resource group. Please note, the offer also supports to use an existing resource group while the group is required to be empty. 
+On the `Basics` pane. Under the `Resource group`, click on the `Create new` link and type in `guideGroup` as the name of the resource group. Please note, the offer also supports to use an existing resource group while the group is required to be empty. 
 
 image::AKS_tool_create_resource_group.png[AKS tool create resource group,align="center"]
 
@@ -145,7 +145,7 @@ https://azure.microsoft.com/en-us/global-infrastructure/services/?products=kuber
 
 Once finish setting up the resource group, click on `Next` and move on to the `AKS` pane. 
 
-To deploy your microservices, you need to create an Azure Container Registry in the same location where your services are deployed and link it to a resource group if using command line. However, when leveraging the `IBM Liberty on AKS`, this linkage will be automatically setup during the process. The created registry will manage container instances that will be deployed to a Kubernetes cluster. 
+To deploy your microservices, you need to create an Azure Container Registry in the same location where your services are deployed and link it to a resource group if using command line. However, when leveraging the `IBM WebSphere Liberty and Open Liberty on AKS` plan, this linkage will be automatically setup during the process. The created registry will manage container instances that will be deployed to a Kubernetes cluster. 
 
 Additionally, you will need to create an AKS Cluster, which is used to host containerized applications managed by Kubernetes on Azure.
 
