@@ -85,7 +85,7 @@ https://azure.microsoft.com/en-us/pricing/purchase-options/pay-as-you-go/[Micros
 to create an account with your email and start a Pay-As-You-Go subscription. 
 
 * *IBM WebSphere Liberty and Open Liberty on AKS:* You will need to use the IBM WebSphere Liberty and Open Liberty on AKS plan on Azure marketplace. See the official
-https://learn.microsoft.com/en-us/azure/aks/howto-deploy-java-liberty-app?tabs=in-bash#create-a-liberty-on-aks-deployment-using-the-portal[Create a Liberty on AKS deployment using the portal^] documentation for more information. Or, you can go directly to https://aka.ms/liberty-aks[the offer]. 
+https://learn.microsoft.com/en-us/azure/aks/howto-deploy-java-liberty-app?tabs=in-bash#create-a-liberty-on-aks-deployment-using-the-portal[Create a Liberty on AKS deployment using the portal^] documentation for more information. Or, you can go directly to https://aka.ms/liberty-aks[the offer]. To use this plan, you must have one of the following Azure role-based access control sets: **Contributor** and **User Access Administrator** together, or **Owner** of the current subscription.
 
 * *Azure CLI:* You will need to use the Azure Command Line Interface (CLI). See the official
 https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest[Install the Azure CLI^]
@@ -137,6 +137,8 @@ On the `Basics` pane. Under the `Resource group`, click on the `Create new` link
 image::AKS_tool_create_resource_group.png[AKS tool create resource group,align="center"]
 
 An Azure location must be specified. The metadata for your resources are stored at this specified Azure location. If resources are created later without specifying a location, these new resources will run in the same region that you specified for creating a resource group. Click on the `Region` drop down menu and select the desired location.
+
+image::Region_Selection.png[Region Selection,align="center"]
 
 However, AKS is not available in all regions. Make sure that the region you select is 
 https://azure.microsoft.com/en-us/global-infrastructure/services/?products=kubernetes-service[compatible with AKS^].
