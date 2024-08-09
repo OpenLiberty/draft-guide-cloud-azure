@@ -153,13 +153,14 @@ For more details on configuring these panes, please refer to the documentation o
 
 Select **Review + create** pane to validate your setup. Once you complete the review and the validation process, click on the **Create** button to initiate the deployment process, which may take up to 20 minutes to complete.
 
-Upon completion of the deployment process, navigate to the resource group overview page in the Azure Portal. Review the created resource group and search for resources of the type `Container registry`. Locate the container registry that was created during the deployment. The name of the Container Registry will be used in `[registry-name]`.
-
-image::Locate_ACR.png[Locate ACR,align="center"]
 
 == Uploading images to a container registry
 
 === Logging into the container registry
+
+Upon completion of the deployment process, navigate to the resource group overview page in the Azure Portal. Review the created resource group and search for resources of the type `Container registry`. Locate the container registry that was created during the deployment. The name of the Container Registry will be used in `[registry-name]`.
+
+image::Locate_ACR.png[Locate ACR,align="center"]
 
 To push Docker images to your registry, you must log in to your Azure Container Registry by using the Azure CLI.
 
@@ -268,8 +269,7 @@ Name           Location    ResourceGroup    KubernetesVersion    CurrentKubernet
 clusterXXXXXX  eastus      guideGroup       1.29                 1.29.7                      Succeeded            clusterXXXXXX-dns-pazznf8n.hcp.eastus.azmk8s.io
 ----
 
-Merge the credentials of your cluster into your current Kubernetes configuration by using the `az aks get-credentials` command. 
-The default Kubernetes configuration file that is updated with your cluster credentials is located within the `~/.kube/config` filepath. Replacing `[cluster-name]` with the name of the cluster.
+Merge the credentials of your cluster into your current Kubernetes configuration by using the `az aks get-credentials` command. Replacing `[cluster-name]` with the name of the cluster. The default Kubernetes configuration file that is updated with your cluster credentials is located within the `~/.kube/config` filepath.
 
 [role=command]
 ```
