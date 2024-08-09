@@ -274,7 +274,7 @@ To obtain the information about the Kubernetes cluster created within the `guide
 az aks list --resource-group guideGroup --output table
 ```
 
-The cluster name, formatted as `cluster1234d5`, should be identified in the following output.
+The cluster name, formatted as `clusterXXXXXX`, should be identified in the following output.
 
 [role="no_copy"]
 ----
