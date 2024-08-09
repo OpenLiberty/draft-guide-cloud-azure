@@ -145,9 +145,7 @@ https://azure.microsoft.com/en-us/global-infrastructure/services/?products=kuber
 
 === Creating a container registry and an AKS cluster
 
-After setting up the resource group, you can leave the remaining configuration at its default settings by skipping the `AKS`, `Load Balancing`, and `Operator and Application` panes. The default configuration will automatically set up an https://azure.microsoft.com/en-ca/products/container-registry[Azure Container Registry] in the same location where your services are deployed and link it to the resource group, and an https://learn.microsoft.com/en-us/azure/aks/tutorial-kubernetes-deploy-cluster?tabs=azure-cli[AKS cluster] will also be created.
-
-For more details on configuring these panes, please refer to the documentation of https://learn.microsoft.com/en-us/azure/aks/howto-deploy-java-liberty-app?tabs=in-bash#create-a-liberty-on-aks-deployment-using-the-portal[Create a Liberty on AKS deployment using the portal]
+After setting up the resource group, you can leave the remaining configuration at its default settings by skipping the `AKS`, `Load Balancing`, and `Operator and Application` panes. The default configuration will automatically set up an https://azure.microsoft.com/en-ca/products/container-registry[Azure Container Registry] in the same location where your services are deployed and link it to the resource group, and an https://learn.microsoft.com/en-us/azure/aks/tutorial-kubernetes-deploy-cluster?tabs=azure-cli[AKS cluster] will also be created. For more details on configuring these panes, please refer to the documentation of https://learn.microsoft.com/en-us/azure/aks/howto-deploy-java-liberty-app?tabs=in-bash#create-a-liberty-on-aks-deployment-using-the-portal[Create a Liberty on AKS deployment using the portal]
 
 === Finishing the creations
 
