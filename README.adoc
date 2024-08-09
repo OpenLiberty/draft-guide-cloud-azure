@@ -167,7 +167,7 @@ Alternatively, if you prefer to use command line to retrieve information about t
 az acr list --resource-group guideGroup --output table
 ```
 
-The result should be same as following
+You will see an output similar to the following:
 
 [role="no_copy"]
 ----
