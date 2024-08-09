@@ -294,8 +294,8 @@ The `kubectl get nodes` command outputs information about the node. Please ensur
 
 [role="no_copy"]
 ----
-NAME                                STATUS   ROLES   AGE   VERSION
-aks-agentpool-39342667-vmss000000   Ready    agent   20h   v1.28.10
+NAME                                STATUS   ROLES    AGE   VERSION
+aks-agentpool-15010410-vmss000000   Ready    <none>   65m   v1.29.7
 ----
 
 === Storing registry credentials in a secret
