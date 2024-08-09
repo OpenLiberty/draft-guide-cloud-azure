@@ -85,7 +85,7 @@ https://azure.microsoft.com/en-us/pricing/purchase-options/pay-as-you-go/[Micros
 to create an account with your email and start a Pay-As-You-Go subscription. 
 
 * *IBM WebSphere Liberty and Open Liberty on AKS:* You will need to use the IBM WebSphere Liberty and Open Liberty on AKS plan on Azure marketplace. See the official
-https://learn.microsoft.com/en-us/azure/aks/howto-deploy-java-liberty-app?tabs=in-bash#create-a-liberty-on-aks-deployment-using-the-portal[Create a Liberty on AKS deployment using the portal^] documentation for more information. Or, you can go directly to https://aka.ms/liberty-aks[the offer]. To use this plan, you must have one of the following Azure role-based access control sets: **Contributor** and **User Access Administrator** together, or **Owner** of the current subscription.
+https://learn.microsoft.com/en-us/azure/aks/howto-deploy-java-liberty-app?tabs=in-bash#create-a-liberty-on-aks-deployment-using-the-portal[Create a Liberty on AKS deployment using the portal^] documentation for more information. Or, you can go directly to https://aka.ms/liberty-aks[the plan]. To use this plan, you must have one of the following Azure role-based access control sets: **Contributor** and **User Access Administrator** together, or **Owner** of the current subscription.
 
 * *Azure CLI:* You will need to use the Azure Command Line Interface (CLI). See the official
 https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest[Install the Azure CLI^]
@@ -132,7 +132,7 @@ A resource group is an Azure construct to manage a logical collection of resourc
 
 To create the resource group in an efficient way, check out the https://aka.ms/liberty-aks[IBM WebSphere Liberty and Open Liberty on AKS] plan and click on the `Create` button to start the process. 
 
-On the `Basics` pane. Under the `Resource group`, click on the `Create new` link and type in `guideGroup` as the name of the resource group. Please note, the offer also supports to use an existing resource group while the group is required to be empty. 
+On the `Basics` pane. Under the `Resource group`, click on the `Create new` link and type in `guideGroup` as the name of the resource group. Please note, the plan also supports to use an existing resource group while the group is required to be empty. 
 
 image::AKS_tool_create_resource_group.png[AKS tool create resource group,align="center"]
 
@@ -145,27 +145,13 @@ https://azure.microsoft.com/en-us/global-infrastructure/services/?products=kuber
 
 === Creating a container registry and an AKS cluster
 
-Once finish setting up the resource group, click on `Next` and move on to the `AKS` pane. 
+After setting up the resource group, you can leave the remaining configuration at its default settings by skipping the `AKS`, `Load Balancing`, and `Operator and Application` panes. The default configuration will automatically set up an https://azure.microsoft.com/en-ca/products/container-registry[Azure Container Registry] in the same location where your services are deployed and link it to the resource group, and an https://learn.microsoft.com/en-us/azure/aks/tutorial-kubernetes-deploy-cluster?tabs=azure-cli[AKS cluster] will also be created.
 
-To deploy your microservices, you need to create an Azure Container Registry in the same location where your services are deployed and link it to a resource group if using command line. However, when leveraging the `IBM WebSphere Liberty and Open Liberty on AKS` plan, this linkage will be automatically setup during the process. The created registry will manage container instances that will be deployed to a Kubernetes cluster. 
-
-Additionally, you will need to create an AKS Cluster, which is used to host containerized applications managed by Kubernetes on Azure.
-
-In the `AKS` pane, you can optionally select an existing AKS cluster and container registry instance. You can also adjust the settings for the size and number of the virtual machines in the AKS node pool.
-
-From this guide's perspective, you can keep all the defaults on the pane as shown below, and the tool will create a new AKS cluster and a container registry instance. 
-
-image::Create_AKS_and_ACR.png[Create AKS and ACR,align="center"]
+For more details on configuring these panes, please refer to the documentation of https://learn.microsoft.com/en-us/azure/aks/howto-deploy-java-liberty-app?tabs=in-bash#create-a-liberty-on-aks-deployment-using-the-portal[Create a Liberty on AKS deployment using the portal]
 
 === Finishing the creations
 
-For pane `Load balancing` and `Operator and application`, you can keep the default option in this guide. For more information about the configuration in these two panes, please visit the documentation of https://learn.microsoft.com/en-us/azure/aks/howto-deploy-java-liberty-app?tabs=in-bash#create-a-liberty-on-aks-deployment-using-the-portal[Create a Liberty on AKS deployment using the portal]
-
-Select **Review + create** button to validate your setup. Once you complete the review and the validation process, select the **Create** button to initiate the deployment process, which may take up to 20 minutes to complete.
-
-// =================================================================================================
-// Uploading images to a container registry
-// =================================================================================================
+Select **Review + create** pane to validate your setup. Once you complete the review and the validation process, click on the **Create** button to initiate the deployment process, which may take up to 20 minutes to complete.
 
 Upon completion of the deployment process, navigate to the resource group overview page in the Azure Portal. Review the created resource group and search for resources of the type `Container registry`. Locate the container registry that was created during the deployment. The name of the Container Registry will be used in `[registry-name]`.
 
@@ -266,12 +252,24 @@ docker push [registry-server]/inventory:1.0-SNAPSHOT
 
 === Merge the cluster credentials into the current Kubernetes configuration
 
-To locate the created Kubernetes cluster, go to the resource group overview page in the Azure Portal. Look for resources of type `Kubernetes service` and find the cluster with a name in the format `clusterXXXXXX`. Replacing `[cluster-name]` with the name of the cluster.
+To locate the created Kubernetes cluster within the `guideGroup` resource group, execute the following command.  
 
-image::Locate_created_cluster.png[Locate created cluster,align="center"]
+[role=command]
+```
+az aks list --resource-group guideGroup --output table
+```
+
+The cluster name, formatted as `clusterXXXXXX`, should be identified in the following output.
+
+[role="no_copy"]
+----
+Name           Location    ResourceGroup    KubernetesVersion    CurrentKubernetesVersion    ProvisioningState    Fqdn
+-------------  ----------  ---------------  -------------------  --------------------------  -------------------  -----------------------------------------------
+clusterXXXXXX  eastus      guideGroup       1.29                 1.29.7                      Succeeded            clusterXXXXXX-dns-pazznf8n.hcp.eastus.azmk8s.io
+----
 
 Merge the credentials of your cluster into your current Kubernetes configuration by using the `az aks get-credentials` command. 
-The default Kubernetes configuration file that is updated with your cluster credentials is located within the `~/.kube/config` filepath. 
+The default Kubernetes configuration file that is updated with your cluster credentials is located within the `~/.kube/config` filepath. Replacing `[cluster-name]` with the name of the cluster.
 
 [role=command]
 ```
