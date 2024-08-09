@@ -132,7 +132,7 @@ A resource group is an Azure construct to manage a logical collection of resourc
 
 To create the resource group in an efficient way, check out the https://aka.ms/liberty-aks[IBM WebSphere Liberty and Open Liberty on AKS] plan and click on the `Create` button to start the process. 
 
-On the `Basics` pane. Under the `Resource group`, click on the `Create new` link and type in `guideGroup` as the name of the resource group. Please note, the plan also supports to use an existing resource group while the group is required to be empty. 
+On the **Basics** pane. Under the `Resource group`, click on the `Create new` link and type in `guideGroup` as the name of the resource group. Please note, the plan also supports to use an existing resource group while the group is required to be empty. 
 
 image::AKS_tool_create_resource_group.png[AKS tool create resource group,align="center"]
 
@@ -159,6 +159,22 @@ Select **Review + create** pane to validate your setup. Once you complete the re
 Upon completion of the deployment process, navigate to the resource group overview page in the Azure Portal. Review the created resource group and search for resources of the type `Container registry`. Locate the container registry that was created during the deployment. The name of the Container Registry will be used in `[registry-name]`.
 
 image::Locate_ACR.png[Locate ACR,align="center"]
+
+Alternatively, if you prefer to use command line to retrieve information about the created container registry, execute the following command. 
+
+[role=command]
+```
+az acr list --resource-group guideGroup --output table
+```
+
+The result should be same as following
+
+[role="no_copy"]
+----
+NAME       RESOURCE GROUP    LOCATION    SKU    LOGIN SERVER          CREATION DATE         ADMIN ENABLED
+---------  ----------------  ----------  -----  --------------------  --------------------  ---------------
+acr1234d5  guideGroup        eastus      Basic  acr1234d5.azurecr.io  2024-08-09T17:53:38Z  True
+----
 
 To push Docker images to your registry, you must log in to your Azure Container Registry by using the Azure CLI.
 
@@ -251,20 +267,20 @@ docker push [registry-server]/inventory:1.0-SNAPSHOT
 
 === Merge the cluster credentials into the current Kubernetes configuration
 
-To locate the created Kubernetes cluster within the `guideGroup` resource group, execute the following command.  
+To obtain the information about the Kubernetes cluster created within the `guideGroup` resource group, you can either view the resource group overview page or execute the following command.  
 
 [role=command]
 ```
 az aks list --resource-group guideGroup --output table
 ```
 
-The cluster name, formatted as `clusterXXXXXX`, should be identified in the following output.
+The cluster name, formatted as `cluster1234d5`, should be identified in the following output.
 
 [role="no_copy"]
 ----
 Name           Location    ResourceGroup    KubernetesVersion    CurrentKubernetesVersion    ProvisioningState    Fqdn
 -------------  ----------  ---------------  -------------------  --------------------------  -------------------  -----------------------------------------------
-clusterXXXXXX  eastus      guideGroup       1.29                 1.29.7                      Succeeded            clusterXXXXXX-dns-pazznf8n.hcp.eastus.azmk8s.io
+cluster1234d5  eastus      guideGroup       1.29                 1.29.7                      Succeeded            cluster1234d5-dns-pazznf8n.hcp.eastus.azmk8s.io
 ----
 
 Merge the credentials of your cluster into your current Kubernetes configuration by using the `az aks get-credentials` command. Replacing `[cluster-name]` with the name of the cluster. The default Kubernetes configuration file that is updated with your cluster credentials is located within the `~/.kube/config` filepath.
