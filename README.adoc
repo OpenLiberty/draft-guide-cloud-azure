@@ -132,7 +132,7 @@ A resource group is an Azure construct to manage a logical collection of resourc
 
 To create the resource group in an efficient way, check out the https://aka.ms/liberty-aks[IBM WebSphere Liberty and Open Liberty on AKS] plan and click on the `Create` button to start the process. 
 
-On the **Basics** pane. Under the `Resource group`, click on the `Create new` link and type in `guideGroup` as the name of the resource group. Please note, the plan also supports to use an existing resource group while the group is required to be empty. 
+On the **Basics** pane. Under the `Resource group`, click on the `Create new` link and type in `guideGroup` as the name of the resource group.
 
 image::AKS_tool_create_resource_group.png[AKS tool create resource group,align="center"]
 
@@ -156,7 +156,7 @@ Select **Review + create** pane to validate your setup. Once you complete the re
 
 === Logging into the container registry
 
-Upon completion of the deployment process, navigate to the resource group overview page in the Azure Portal. Review the created resource group and search for resources of the type `Container registry`. Locate the container registry that was created during the deployment. The name of the Container Registry will be used in `[registry-name]`.
+Upon completion of the deployment process, navigate to the resource group overview page in the Azure Portal. Review the created resource group and search for resources of the type `Container registry`. Locate the container registry that was created during the deployment. The container registry name should be substituted with `[registry-name]`. For example, use "acrc75e71" as seen under the `Name` column in the output.
 
 image::Locate_ACR.png[Locate ACR,align="center"]
 
@@ -173,10 +173,10 @@ You will see an output similar to the following:
 ----
 NAME       RESOURCE GROUP    LOCATION    SKU    LOGIN SERVER          CREATION DATE         ADMIN ENABLED
 ---------  ----------------  ----------  -----  --------------------  --------------------  ---------------
-acr1234d5  guideGroup        eastus      Basic  acr1234d5.azurecr.io  2024-08-09T17:53:38Z  True
+acrc75e71  guideGroup        eastus      Basic  acrc75e71.azurecr.io  2024-08-09T17:53:38Z  True
 ----
 
-To push Docker images to your registry, you must log in to your Azure Container Registry by using the Azure CLI.
+To push Docker images to your registry, you must log in to your Azure Container Registry by using the Azure CLI. Replace the [registry-name] with the name of the container registry.
 
 [role=command]
 ```
@@ -241,7 +241,7 @@ system        1.0-SNAPSHOT    1dff6d0b4f31    5 minutes ago    470MB
 Pushing the images to a registry allows the cluster to create pods using your container images.
 
 First, tag your container images with your registry.
-Replace `[registry-server]` with the server name of your container registry.
+Replace `[registry-server]` with the login server name of your container registry.
 To get the server for your registry, run the `az acr show -n [registry-name] --query loginServer` command.
 The `[registry-server]` looks like `[registry-name].azurecr.io`.
 
@@ -280,7 +280,7 @@ The cluster name, formatted as `clusterXXXXXX`, should be identified in the foll
 ----
 Name           Location    ResourceGroup    KubernetesVersion    CurrentKubernetesVersion    ProvisioningState    Fqdn
 -------------  ----------  ---------------  -------------------  --------------------------  -------------------  -----------------------------------------------
-cluster1234d5  eastus      guideGroup       1.29                 1.29.7                      Succeeded            cluster1234d5-dns-pazznf8n.hcp.eastus.azmk8s.io
+clusterc75e71  eastus      guideGroup       1.29                 1.29.7                      Succeeded            clusterc75e71-dns-pazznf8n.hcp.eastus.azmk8s.io
 ----
 
 Merge the credentials of your cluster into your current Kubernetes configuration by using the `az aks get-credentials` command. Replacing `[cluster-name]` with the name of the cluster. The default Kubernetes configuration file that is updated with your cluster credentials is located within the `~/.kube/config` filepath.
