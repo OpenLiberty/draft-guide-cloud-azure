@@ -159,7 +159,7 @@ Upon completion of the deployment process, navigate to the resource group overvi
 
 image::Locate_ACR.png[Locate ACR,align="center"]
 
-Alternatively, if you prefer to use command line to retrieve information about the created container registry, execute the following command. 
+Alternatively, if you prefer to use command line to retrieve information about the created container registry, execute the following command:
 
 [role=command]
 ```
@@ -239,7 +239,7 @@ system        1.0-SNAPSHOT    1dff6d0b4f31    5 minutes ago    470MB
 
 Pushing the images to a registry allows the cluster to create pods using your container images.
 
-First, get your registry server name that looks like `[registry-name].azurecr.io` or run the following command.
+First, get your registry server name that looks like `[registry-name].azurecr.io` or run the following command:
 
 [role=command]
 ```
@@ -277,7 +277,7 @@ docker push [registry-server]/inventory:1.0-SNAPSHOT
 
 === Merge the cluster credentials into the current Kubernetes configuration
 
-To obtain the information about the Kubernetes cluster created within the `guideGroup` resource group, you can either view the resource group overview page or execute the following command.  
+To obtain the information about the Kubernetes cluster created within the `guideGroup` resource group, you can either view the resource group overview page or execute the following command: 
 
 [role=command]
 ```
