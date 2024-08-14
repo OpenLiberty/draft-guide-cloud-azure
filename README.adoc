@@ -10,6 +10,7 @@
 :page-layout: guide-multipane
 :page-duration: 1 hour
 :page-releasedate: 2019-08-13
+:page-majorupdateddate: 2024-08-31
 :page-description: Explore how to deploy microservices to Azure Kubernetes Service (AKS).
 :page-tags: ['kubernetes', 'docker', 'cloud']
 :page-permalink: /guides/{projectid}
@@ -59,7 +60,7 @@ you to easily scale and manage your microservices in a high-availability setup.
 
 Azure offers a managed {kube} service called **Azure Kubernetes Service** (AKS). Using AKS simplifies the process of running Kubernetes on Azure without needing to install or maintain your own Kubernetes control plane. It provides a hosted {kube} cluster that you can deploy your microservices to. You will use AKS with an **Azure Container Registry** (ACR). ACR is a private registry that is used to store and distribute your container images. Note, because AKS is not free, a cost may associated with running this guide. See the official https://azure.microsoft.com/en-us/pricing/details/kubernetes-service/[AKS pricing^] documentation for more details.
 
-This guide will introduce **IBM WebSphere Liberty and Open Liberty on AKS** plan, which solution automates the majority of standard steps involved in provisioning WebSphere Liberty or Open Liberty on an AKS cluster. Once the initial provisioning process is complete, you are free to customize deployments further.
+This guide will introduce **IBM WebSphere Liberty and Open Liberty on AKS** plan, which solution automates the majority of standard steps involved in provisioning WebSphere Liberty or Open Liberty on an AKS cluster. After the initial provisioning process is complete, you are free to customize deployments further.
 
 The two microservices you will deploy are called `system` and `inventory`. 
 The `system` microservice returns the JVM system properties of the running container. 
@@ -147,20 +148,18 @@ https://azure.microsoft.com/en-us/global-infrastructure/services/?products=kuber
 
 After setting up the resource group, you can leave the remaining configuration at its default settings by skipping the `AKS`, `Load balancing`, and `Operator and application` panes. The default configuration will automatically set up an https://azure.microsoft.com/en-ca/products/container-registry[Azure Container Registry] in the same location where your services are deployed and link it to the resource group, and an https://learn.microsoft.com/en-us/azure/aks/tutorial-kubernetes-deploy-cluster?tabs=azure-cli[AKS cluster] will also be created. For more details on configuring these panes, please refer to the documentation of https://learn.microsoft.com/en-us/azure/aks/howto-deploy-java-liberty-app?tabs=in-bash#create-a-liberty-on-aks-deployment-using-the-portal[Create a Liberty on AKS deployment using the portal].
 
-=== Finishing the creations
-
-Select **Review + create** pane to validate your setup. Once you complete the review and the validation process, click on the **Create** button to initiate the deployment process, which may take up to 20 minutes to complete.
+Select **Review + create** pane to validate your setup. After you complete the review and the validation process, click on the **Create** button to initiate the deployment process, which may take up to 20 minutes to complete.
 
 
 == Uploading images to a container registry
 
 === Logging into the container registry
 
-Upon completion of the deployment process, navigate to the resource group overview page in the Azure Portal. Review the created resource group and search for resources of the type `Container registry`. Locate the container registry that was created during the deployment. The container registry name should be substituted with `[registry-name]`. For example, use "acrc75e71" as seen under the `Name` column in the output.
+Upon completion of the deployment process, navigate to the resource group overview page in the Azure Portal. Review the created resource group and search for resources of the type `Container registry`. Locate the container registry that was created during the deployment. The container registry name will be used to substitute the `[registry-name]` value of the commands in below. For example, use `acrc75e71` as seen under the `Name` column in the output.
 
 image::Locate_ACR.png[Locate ACR,align="center"]
 
-Alternatively, if you prefer to use command line to retrieve information about the created container registry, execute the following command. 
+Alternatively, if you prefer to use command line to retrieve information about the created container registry, execute the following command:
 
 [role=command]
 ```
@@ -176,14 +175,14 @@ NAME       RESOURCE GROUP    LOCATION    SKU    LOGIN SERVER          CREATION D
 acrc75e71  guideGroup        eastus      Basic  acrc75e71.azurecr.io  2024-08-09T17:53:38Z  True
 ----
 
-To push Docker images to your registry, you must log in to your Azure Container Registry by using the Azure CLI. Replace the [registry-name] with the name of the container registry.
+To push Docker images to your registry, run the following Azure CLI command to log in your Azure Container Registry. Replace the `[registry-name]` with the name of the container registry.
 
 [role=command]
 ```
 az acr login -n [registry-name]
 ```
 
-Once you log in, you will see the following message:
+After you log in, you will see the following message:
 
 [role="no_copy"]
 ----
@@ -240,10 +239,21 @@ system        1.0-SNAPSHOT    1dff6d0b4f31    5 minutes ago    470MB
 
 Pushing the images to a registry allows the cluster to create pods using your container images.
 
-First, tag your container images with your registry.
-Replace `[registry-server]` with the login server name of your container registry.
-To get the server for your registry, run the `az acr show -n [registry-name] --query loginServer` command.
-The `[registry-server]` looks like `[registry-name].azurecr.io`.
+First, get your registry server name that looks like `[registry-name].azurecr.io` or run the following command:
+
+[role=command]
+```
+az acr show -n [registry-name] --query loginServer
+```
+
+You will see an output similar to the following that will be used to substitute the `[registry-server]` value of the commands in below.
+
+[role="no_copy"]
+----
+"acr31a3a1.azurecr.io"
+----
+
+Tag your container images with your registry by the following commands:
 
 [role=command]
 ```
@@ -251,7 +261,7 @@ docker tag system:1.0-SNAPSHOT [registry-server]/system:1.0-SNAPSHOT
 docker tag inventory:1.0-SNAPSHOT [registry-server]/inventory:1.0-SNAPSHOT
 ```
 
-Finally, push your images to the registry:
+Finally, push your images to the registry by the following commands:
 
 [role=command]
 ```
@@ -267,7 +277,7 @@ docker push [registry-server]/inventory:1.0-SNAPSHOT
 
 === Merge the cluster credentials into the current Kubernetes configuration
 
-To obtain the information about the Kubernetes cluster created within the `guideGroup` resource group, you can either view the resource group overview page or execute the following command.  
+To obtain the information about the Kubernetes cluster created within the `guideGroup` resource group, you can either view the resource group overview page or execute the following command: 
 
 [role=command]
 ```
