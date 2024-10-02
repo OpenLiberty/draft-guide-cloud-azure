@@ -446,16 +446,14 @@ You need to wait a while for the `EXTERNAL-IP` to change from `<pending>` to an 
 
 [role="no_copy"]
 ----
-NAME                TYPE           CLUSTER-IP     EXTERNAL-IP   PORT(S)          AGE
-
-system-deployment   LoadBalancer   10.0.162.69    <pending>     9080:30260/TCP   3s
+NAME                TYPE           CLUSTER-IP     EXTERNAL-IP   PORT(S)          AGE
+system-deployment   LoadBalancer   10.0.162.69    <pending>     9080:30260/TCP   3s
 ----
 
 [role="no_copy"]
 ----
-NAME                TYPE           CLUSTER-IP    EXTERNAL-IP     PORT(S)          AGE
-
-system-deployment   LoadBalancer   10.0.162.69   135.237.37.69   9080:32480/TCP   16s
+NAME                TYPE           CLUSTER-IP    EXTERNAL-IP     PORT(S)          AGE
+system-deployment   LoadBalancer   10.0.162.69   135.237.37.69   9080:32480/TCP   16s
 ----
 
 View the information of the `inventory` service to see its `EXTERNAL-IP` address:
@@ -469,16 +467,14 @@ You will need to wait a while for the `EXTERNAL-IP` to change from `<pending>` t
 
 [role="no_copy"]
 ----
-NAME                   TYPE           CLUSTER-IP    EXTERNAL-IP   PORT(S)          AGE
-
-inventory-deployment   LoadBalancer   10.0.96.147   <pending>     9081:30431/TCP   2s
+NAME                   TYPE           CLUSTER-IP    EXTERNAL-IP   PORT(S)          AGE
+inventory-deployment   LoadBalancer   10.0.96.147   <pending>     9081:30431/TCP   2s
 ----
 
 [role="no_copy"]
 ----
-NAME                   TYPE           CLUSTER-IP    EXTERNAL-IP     PORT(S)          AGE
-
-inventory-deployment   LoadBalancer   10.0.96.147   135.237.38.19   9081:30431/TCP   74s
+NAME                   TYPE           CLUSTER-IP    EXTERNAL-IP      PORT(S)          AGE
+inventory-deployment   LoadBalancer   10.0.96.147   135.237.38.19    9081:30431/TCP   74s
 ----
 
 To access your microservices, point your browser to the following URLs, substituting the appropriate `EXTERNAL-IP` hostnames
