@@ -1,0 +1,27 @@
+apiVersion: apps.openliberty.io/v1
+kind: OpenLibertyApplication
+metadata:
+  name: system-deployment
+  labels:
+    app: system
+spec:
+  applicationImage: [registry-server]/system:1.0-SNAPSHOT
+  service:
+    type: LoadBalancer
+    port: 9080
+  expose: true
+  pullSecret: guidesecret
+---
+apiVersion: apps.openliberty.io/v1
+kind: OpenLibertyApplication
+metadata:
+  name: inventory-deployment
+  labels:
+    app: inventory
+spec:
+  applicationImage: [registry-server]/inventory:1.0-SNAPSHOT
+  service:
+    type: LoadBalancer
+    port: 9081
+  expose: true
+  pullSecret: guidesecret
