@@ -8,7 +8,7 @@ metadata:
     app: system
 spec:
   # tag::sysImage[]
-  applicationImage: [registry-server]/system:1.0-SNAPSHOT
+  applicationImage: "[registry-server]/system:1.0-SNAPSHOT"
   # end::sysImage[]
   service:
     # tag::sysLoadBalancer[]
@@ -30,7 +30,7 @@ metadata:
     app: inventory
 spec:
   # tag::invImage[]
-  applicationImage: [registry-server]/inventory:1.0-SNAPSHOT
+  applicationImage: "[registry-server]/inventory:1.0-SNAPSHOT"
   # end::invImage[]
   service:
     # tag::invLoadBalancer[]
