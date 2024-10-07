@@ -363,7 +363,6 @@ Replace `[password]` with the registry password that you viewed with the
 
 [.tab_content.windows_section]
 --
-+
 [role='command']
 ```
 kubectl create secret docker-registry guidesecret ^
@@ -376,7 +375,6 @@ kubectl create secret docker-registry guidesecret ^
 
 [.tab_content.mac_section.linux_section]
 --
-+
 [role='command']
 ```
 kubectl create secret docker-registry guidesecret \
