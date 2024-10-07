@@ -306,7 +306,7 @@ The cluster name, formatted as `clusterXXXXXX`, should be identified in the foll
 ----
 Name           Location    ResourceGroup    KubernetesVersion    CurrentKubernetesVersion    ProvisioningState    Fqdn
 -------------  ----------  ---------------  -------------------  --------------------------  -------------------  -----------------------------------------------
-clusterc75e71  eastus      guideGroup       1.29                 1.29.7                      Succeeded            clusterc75e71-dns-pazznf8n.hcp.eastus.azmk8s.io
+clusterc75e71  eastus      guideGroup       1.29                 1.29.8                      Succeeded            clusterc75e71-dns-pazznf8n.hcp.eastus.azmk8s.io
 ----
 
 Merge the credentials of your cluster into your current Kubernetes configuration by using the `az aks get-credentials` command. Replacing `[cluster-name]` with the name of the cluster. The default Kubernetes configuration file that is updated with your cluster credentials is located within the `~/.kube/config` filepath.
