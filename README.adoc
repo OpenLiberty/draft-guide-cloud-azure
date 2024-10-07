@@ -97,18 +97,18 @@ az --version
 * *kubectl:* You need the Kubernetes command-line tool `kubectl` to interact with your Kubernetes cluster.
 If you do not have `kubectl` installed already, use the Azure CLI to download and install `kubectl` with the following command:
 
-+
 [.tab_content.windows_section]
 --
++
 [role='command']
 ```
 az aks install-cli
 ```
 --
 
-+
 [.tab_content.mac_section.linux_section]
 --
++
 [role='command']
 ```
 sudo az aks install-cli
@@ -364,7 +364,7 @@ kubectl create secret docker-registry guidesecret ^
 
 [.tab_content.mac_section.linux_section]
 --
-[role=command]
+[role='command']
 ```
 kubectl create secret docker-registry guidesecret \
     --docker-server=[registry-server] \
