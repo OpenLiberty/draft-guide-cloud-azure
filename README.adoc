@@ -38,6 +38,12 @@ Explore how to deploy microservices to Azure Kubernetes Service (AKS) on Microso
 :system-api: http://[system-EXTERNAL-IP]:9080/system/properties
 :inventory-api: http://[inventory-EXTERNAL-IP]:9081/inventory/systems
 
+[.tab_link.windows_link]
+`*WINDOWS*`
+[.tab_link.mac_link]
+`*MAC*`
+[.tab_link.linux_link]
+`*LINUX*`
 
 // =================================================================================================
 // Introduction
