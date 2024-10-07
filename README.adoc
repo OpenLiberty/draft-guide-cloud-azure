@@ -113,6 +113,7 @@ az aks install-cli
 ```
 sudo az aks install-cli
 ```
+--
 
 To begin this guide, make sure that you are logged in to Azure to get access to your subscription:
 
@@ -371,6 +372,7 @@ kubectl create secret docker-registry guidesecret \
     --docker-password=[password] \
     --docker-email=[email-address]
 ```
+--
 
 The secret is successfully created with the following output:
 
