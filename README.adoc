@@ -354,8 +354,16 @@ Use the `kubectl create secret docker-registry` command to create a secret to ho
 Replace `[password]` with the registry password that you viewed with the 
 `az acr credential show -n [registry-name]` command. The email that is associated with your Docker account replaces `[email-address]`.
 
+[.tab_link.windows_link]
+`*WINDOWS*`
+[.tab_link.mac_link]
+`*MAC*`
+[.tab_link.linux_link]
+`*LINUX*`
+
 [.tab_content.windows_section]
 --
++
 [role='command']
 ```
 kubectl create secret docker-registry guidesecret ^
@@ -368,6 +376,7 @@ kubectl create secret docker-registry guidesecret ^
 
 [.tab_content.mac_section.linux_section]
 --
++
 [role='command']
 ```
 kubectl create secret docker-registry guidesecret \
