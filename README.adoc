@@ -38,13 +38,6 @@ Explore how to deploy microservices to Azure Kubernetes Service (AKS) on Microso
 :system-api: http://[system-EXTERNAL-IP]:9080/system/properties
 :inventory-api: http://[inventory-EXTERNAL-IP]:9081/inventory/systems
 
-[.tab_link.windows_link]
-`*WINDOWS*`
-[.tab_link.mac_link]
-`*MAC*`
-[.tab_link.linux_link]
-`*LINUX*`
-
 // =================================================================================================
 // Introduction
 // =================================================================================================
@@ -102,6 +95,13 @@ az --version
 
 * *kubectl:* You need the Kubernetes command-line tool `kubectl` to interact with your Kubernetes cluster.
 If you do not have `kubectl` installed already, use the Azure CLI to download and install `kubectl` with the following command:
+
+[.tab_link.windows_link]
+`*WINDOWS*`
+[.tab_link.mac_link]
+`*MAC*`
+[.tab_link.linux_link]
+`*LINUX*`
 
 [.tab_content.windows_section]
 --
