@@ -99,7 +99,6 @@ If you do not have `kubectl` installed already, use the Azure CLI to download an
 
 [.tab_content.windows_section]
 --
-+
 [role='command']
 ```
 az aks install-cli
@@ -108,7 +107,6 @@ az aks install-cli
 
 [.tab_content.mac_section.linux_section]
 --
-+
 [role='command']
 ```
 sudo az aks install-cli
