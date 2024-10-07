@@ -45,15 +45,11 @@ Explore how to deploy microservices to Azure Kubernetes Service (AKS) on Microso
 
 == What you'll learn
 
-You will learn how to deploy two microservices in Open Liberty containers to a {kube} cluster on
-Azure Kubernetes Service (AKS).
+You will learn how to deploy two microservices in Open Liberty containers to a {kube} cluster on Azure Kubernetes Service (AKS).
 
-Kubernetes is an open source container orchestrator that automates many tasks involved in 
-deploying, managing, and scaling containerized applications. If you would like to learn more about Kubernetes and how to use it with the Open Liberty Operator, check out the https://openliberty.io/guides/openliberty-operator-intro.html[Deploying a microservice to Kubernetes using Open Liberty Operator^] guide.
+Kubernetes is an open source container orchestrator that automates many tasks involved in deploying, managing, and scaling containerized applications. If you would like to learn more about Kubernetes and how to use it with the Open Liberty Operator, check out the https://openliberty.io/guides/openliberty-operator-intro.html[Deploying a microservice to Kubernetes using Open Liberty Operator^] guide.
 
-There are different cloud-based solutions for running your {kube} workloads. 
-A cloud-based infrastructure enables you to focus on developing your microservices 
-without worrying about low-level infrastructure details for deployment. Using a cloud helps
+There are different cloud-based solutions for running your {kube} workloads. A cloud-based infrastructure enables you to focus on developing your microservices without worrying about low-level infrastructure details for deployment. Using a cloud helps
 you to easily scale and manage your microservices in a high-availability setup.
 
 Azure offers a managed {kube} service called Azure Kubernetes Service (AKS). Using AKS simplifies the process of running Kubernetes on Azure without needing to install or maintain your own Kubernetes control plane. It provides a hosted {kube} cluster that you can deploy your microservices to. You will use AKS with an Azure Container Registry (ACR). ACR is a private registry that is used to store and distribute your container images. Note, because AKS is not free, a cost may be associated with running this guide. See the official https://azure.microsoft.com/en-us/pricing/details/kubernetes-service/[AKS pricing^] documentation for more details.
@@ -102,9 +98,20 @@ az --version
 If you do not have `kubectl` installed already, use the Azure CLI to download and install `kubectl` with the following command:
 
 +
-[role=command]
+[.tab_content.windows_section]
+--
+[role='command']
 ```
 az aks install-cli
+```
+--
+
++
+[.tab_content.mac_section.linux_section]
+--
+[role='command']
+```
+sudo az aks install-cli
 ```
 
 To begin this guide, make sure that you are logged in to Azure to get access to your subscription:
@@ -145,11 +152,11 @@ Note that AKS is not available in all regions. Make sure that the region you sel
 
 === Setting up ACR and Kubernetes cluster on AKS
 
-After setting up the resource group, you can leave the remaining configuration at its default settings by skipping the **AKS**, **Load balancing**, and **Operator and application** panes. The default configuration will automatically set up an https://azure.microsoft.com/en-ca/products/container-registry[Azure Container Registry] in the same region where your services are deployed, link it to your resource group, and create an https://learn.microsoft.com/en-us/azure/aks/tutorial-kubernetes-deploy-cluster?tabs=azure-cli[AKS cluster]. 
+After setting up the resource group, you can leave the remaining configuration at its default settings by skipping the **AKS**, **Load balancing**, and **Operator and application** panes. The default configuration will automatically set up an https://azure.microsoft.com/en-ca/products/container-registry[Azure Container Registry^] in the same region where your services are deployed, link it to your resource group, create an https://learn.microsoft.com/en-us/azure/aks/tutorial-kubernetes-deploy-cluster?tabs=azure-cli[AKS cluster^], and deploy the https://github.com/OpenLiberty/open-liberty-operator/releases/latest[Open Liberty Operator^] to manage your Open Liberty applications.
 
 For more information on configuring these options, refer to the https://learn.microsoft.com/en-us/azure/aks/howto-deploy-java-liberty-app?tabs=in-bash#create-a-liberty-on-aks-deployment-using-the-portal[Create a Liberty on AKS deployment using the portal] documentation.
 
-Once you have reviewed the configurations, select the **Review + create** pane to validate your setup. After you complete the review and validation process, click **Create** to initiate the deployment. The deployment process may take up to 20 minutes to complete.
+Once you have reviewed the configurations, select **Review + create** to validate your setup. After validation, click **Create** to initiate the deployment, which can take up to 20 minutes to complete. You'll see `Deployment is in progress`, and once complete, a `Your deployment is complete` message will confirm the creation of the ACR and AKS cluster.
 
 == Uploading images to a container registry
 
@@ -323,7 +330,7 @@ The `kubectl get nodes` command outputs information about the node. Please ensur
 [role="no_copy"]
 ----
 NAME                                STATUS   ROLES    AGE   VERSION
-aks-agentpool-15010410-vmss000000   Ready    <none>   65m   v1.29.7
+aks-agentpool-15010410-vmss000000   Ready    <none>   65m   v1.29.8
 ----
 
 === Storing registry credentials in a secret
@@ -342,6 +349,20 @@ Use the `kubectl create secret docker-registry` command to create a secret to ho
 Replace `[password]` with the registry password that you viewed with the 
 `az acr credential show -n [registry-name]` command. The email that is associated with your Docker account replaces `[email-address]`.
 
+[.tab_content.windows_section]
+--
+[role='command']
+```
+kubectl create secret docker-registry guidesecret ^
+    --docker-server=[registry-server] ^
+    --docker-username=[registry-name] ^
+    --docker-password=[password] ^
+    --docker-email=[email-address]
+```
+--
+
+[.tab_content.mac_section.linux_section]
+--
 [role=command]
 ```
 kubectl create secret docker-registry guidesecret \
@@ -350,6 +371,7 @@ kubectl create secret docker-registry guidesecret \
     --docker-password=[password] \
     --docker-email=[email-address]
 ```
+
 The secret is successfully created with the following output:
 
 [role="no_copy"]

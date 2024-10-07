@@ -5,7 +5,7 @@ metadata:
   labels:
     app: system
 spec:
-  applicationImage: "[registry-server]/system:1.0-SNAPSHOT"
+  applicationImage: [registry-server]/system:1.0-SNAPSHOT
   service:
     type: LoadBalancer
     port: 9080
@@ -19,7 +19,7 @@ metadata:
   labels:
     app: inventory
 spec:
-  applicationImage: "[registry-server]/inventory:1.0-SNAPSHOT"
+  applicationImage: [registry-server]/inventory:1.0-SNAPSHOT
   service:
     type: LoadBalancer
     port: 9081
