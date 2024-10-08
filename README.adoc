@@ -10,7 +10,7 @@
 :page-layout: guide-multipane
 :page-duration: 1 hour
 :page-releasedate: 2019-08-13
-:page-majorupdateddate: 2024-08-31
+:page-majorupdateddate: 2024-10-31
 :page-description: Explore how to deploy microservices to Azure Kubernetes Service (AKS).
 :page-tags: ['kubernetes', 'docker', 'cloud']
 :page-permalink: /guides/{projectid}
@@ -161,7 +161,7 @@ After setting up the resource group, you can leave the remaining configuration a
 
 For more information on configuring these options, refer to the https://learn.microsoft.com/en-us/azure/aks/howto-deploy-java-liberty-app?tabs=in-bash#create-a-liberty-on-aks-deployment-using-the-portal[Create a Liberty on AKS deployment using the portal] documentation.
 
-Once you have reviewed the configurations, select **Review + create** to validate your setup. After validation, click **Create** to initiate the deployment, which can take up to 20 minutes to complete. You'll see `Deployment is in progress`, and once complete, a `Your deployment is complete` message will confirm the creation of the ACR and AKS cluster.
+Once you have reviewed the configurations, select **Review + create** to validate your setup. After validation, click **Create** to initiate the deployment, which can take up to 20 minutes to complete. You'll see a `Deployment is in progress` message, and when the deployment is complete, a `Your deployment is complete` message will confirm the creation of the ACR and AKS cluster.
 
 == Uploading images to a container registry
 
