@@ -1,0 +1,43 @@
+apiVersion: apps.openliberty.io/v1
+# tag::sysCr[]
+kind: OpenLibertyApplication
+# end::sysCr[]
+metadata:
+  name: system-deployment
+  labels:
+    app: system
+spec:
+  # tag::sysImage[]
+  applicationImage: "[registry-server]/system:1.0-SNAPSHOT"
+  # end::sysImage[]
+  service:
+    # tag::sysLoadBalancer[]
+    type: LoadBalancer
+    # end::sysLoadBalancer[]
+    port: 9080
+  expose: true
+  # tag::sysSecret[]
+  pullSecret: guidesecret
+  # end::sysSecret[]
+---
+apiVersion: apps.openliberty.io/v1
+# tag::invCr[]
+kind: OpenLibertyApplication
+# end::invCr[]
+metadata:
+  name: inventory-deployment
+  labels:
+    app: inventory
+spec:
+  # tag::invImage[]
+  applicationImage: "[registry-server]/inventory:1.0-SNAPSHOT"
+  # end::invImage[]
+  service:
+    # tag::invLoadBalancer[]
+    type: LoadBalancer
+    # end::invLoadBalancer[]
+    port: 9081
+  expose: true
+  # tag::invSecret[]
+  pullSecret: guidesecret
+  # end::invSecret[]
