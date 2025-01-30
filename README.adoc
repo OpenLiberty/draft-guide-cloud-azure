@@ -46,7 +46,7 @@ Explore how to deploy microservices to Azure Kubernetes Service (AKS) on Microso
 
 You will learn how to deploy two microservices in Open Liberty containers to a {kube} cluster on Azure Kubernetes Service (AKS).
 
-Kubernetes is an open source container orchestrator that automates many tasks involved in deploying, managing, and scaling containerized applications. If you would like to learn more about Kubernetes and how to use it with the Open Liberty Operator, check out the https://openliberty.io/guides/openliberty-operator-intro.html[Deploying a microservice to Kubernetes using Open Liberty Operator^] guide.
+Kubernetes is an open source container orchestrator that automates many tasks involved in deploying, managing, and scaling containerized applications. To learn more about Kubernetes and how to use it with the Open Liberty Operator, check out the https://openliberty.io/guides/openliberty-operator-intro.html[Deploying a microservice to Kubernetes using Open Liberty Operator^] guide.
 
 There are different cloud-based solutions for running your {kube} workloads. A cloud-based infrastructure enables you to focus on developing your microservices without worrying about low-level infrastructure details for deployment. Using a cloud helps
 you to easily scale and manage your microservices in a high-availability setup.
