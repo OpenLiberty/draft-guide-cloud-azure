@@ -161,7 +161,7 @@ After you set up the resource group, leave the remaining configuration at its de
 
 For more information on configuring these options, see the https://learn.microsoft.com/en-us/azure/aks/howto-deploy-java-liberty-app?tabs=in-bash#create-a-liberty-on-aks-deployment-using-the-portal[Create a Liberty on AKS deployment using the portal] documentation.
 
-Once you have reviewed the configurations, select **Review + create** to validate your setup. After validation, click **Create** to initiate the deployment, which can take up to 20 minutes to complete. You'll see a `Deployment is in progress` message, and when the deployment is complete, a `Your deployment is complete` message will confirm the creation of the ACR and AKS cluster.
+After you review the configurations, select **Review + create** to validate your setup. After validation, click **Create** to initiate the deployment, which can take up to 20 minutes to complete. You'll see a `Deployment is in progress` message, and when the deployment is complete, a `Your deployment is complete` message will confirm the creation of the ACR and AKS cluster.
 
 == Uploading images to a container registry
 
