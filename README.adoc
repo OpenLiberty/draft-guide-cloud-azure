@@ -259,7 +259,7 @@ First, retrieve your registry server name, which typically be in the following f
 az acr show -n [registry-name] --query loginServer
 ```
 
-You will see an output similar to the following that will be used to substitute the `[registry-server]` value of the commands in below.
+Look for output similar to the following example. 
 
 [role="no_copy"]
 ----
