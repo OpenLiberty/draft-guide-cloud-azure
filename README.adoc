@@ -184,7 +184,7 @@ Alternatively, if you prefer using the command line, you can retrieve the contai
 az acr list --resource-group guideGroup --output table
 ```
 
-This command will return a table with the details of your ACR, including its name. For example, you will see an output similar to the following:
+This command returns a table with the details of your ACR, including its name. Look for output similar to the following example:
 
 [role="no_copy"]
 ----
