@@ -401,7 +401,7 @@ Now that your container images are built and your Kubernetes cluster is ready, y
 
 === Creating a deployment definition
 
-The Open Liberty Operator provides custom resource definitions (CRDs) that allow you to define how your Open Liberty applications are deployed. These CRDs are described in a `yaml` file, which outlines the deployment details and services required for your application. All resources can also be deleted from the cluster by using the same `yaml` file that you used to deploy them. The [hotspot]`deploy.yaml` resource definition file is provided for you. If you are interested in learning more about deploying microservices using the Open Liberty Operator, check out the https://openliberty.io/guides/openliberty-operator-intro.html[Deploying a microservice to Kubernetes using Open Liberty Operator^] guide.
+The Open Liberty Operator provides custom resource definitions (CRDs) that define how your Open Liberty applications are deployed. These CRDs are described in a YAML file, which outlines the deployment details and services required for your application. You can also delete any resources from the cluster by using the same YAML file that you used to deploy them. In this guide, the [hotspot]`deploy.yaml` resource definition file is provided for you. To learn more about deploying microservices using the Open Liberty Operator, check out the https://openliberty.io/guides/openliberty-operator-intro.html[Deploying a microservice to Kubernetes using Open Liberty Operator^] guide.
 
 [role="code_command hotspot file=0", subs="quotes"]
 ----
