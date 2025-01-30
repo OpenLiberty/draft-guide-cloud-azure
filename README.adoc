@@ -330,7 +330,7 @@ Run the following command to check the status of the available nodes in your AKS
 kubectl get nodes
 ```
 
-The `kubectl get nodes` command outputs information about the node. Please ensure that the `STATUS` of the node is in the `Ready` state before proceeding with the subsequent steps. 
+The `kubectl get nodes` command outputs information about the node. Ensure that the `STATUS` of the node is in the `Ready` state before you proceed. 
 
 [role="no_copy"]
 ----
