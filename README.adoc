@@ -274,7 +274,7 @@ docker tag system:1.0-SNAPSHOT [registry-server]/system:1.0-SNAPSHOT
 docker tag inventory:1.0-SNAPSHOT [registry-server]/inventory:1.0-SNAPSHOT
 ```
 
-Finally, push your images to the registry by the following commands:
+Finally, push your images to the registry by running the following commands:
 
 [role=command]
 ```
