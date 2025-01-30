@@ -239,7 +239,7 @@ To verify that the images are built, run the `docker images` command to list all
 docker images
 ```
 
-Your two images, `system` and `inventory`, should appear in the list of all Docker images:
+Your two images, `system` and `inventory`, are included in the list of all Docker images:
 
 [role="no_copy"]
 ----
