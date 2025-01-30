@@ -252,7 +252,7 @@ system        1.0-SNAPSHOT    1dff6d0b4f31    5 minutes ago    470MB
 
 Pushing the images to a registry allows the cluster to create pods using your container images.
 
-First, retrieve your registry server name. This will typically be in the format `[registry-name].azurecr.io`. You can find this by running the following command:
+First, retrieve your registry server name, which typically be in the following format: `[registry-name].azurecr.io`. You can find the server name by running the following command:
 
 [role=command]
 ```
