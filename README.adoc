@@ -157,7 +157,7 @@ Note that AKS is not available in all regions. Make sure that the region you sel
 
 === Setting up ACR and Kubernetes cluster on AKS
 
-After setting up the resource group, you can leave the remaining configuration at its default settings by skipping the **AKS**, **Load balancing**, and **Operator and application** panes. The default configuration will automatically set up an https://azure.microsoft.com/en-ca/products/container-registry[Azure Container Registry^] in the same region where your services are deployed, link it to your resource group, create an https://learn.microsoft.com/en-us/azure/aks/tutorial-kubernetes-deploy-cluster?tabs=azure-cli[AKS cluster^], and deploy the https://github.com/OpenLiberty/open-liberty-operator/releases/latest[Open Liberty Operator^] to manage your Open Liberty applications.
+After you set up the resource group, leave the remaining configuration at its default settings by skipping the **AKS**, **Load balancing**, and **Operator and application** panes. The default configuration automatically sets up an https://azure.microsoft.com/en-ca/products/container-registry[Azure Container Registry^] in the same region where your services are deployed, links it to your resource group, creatse an https://learn.microsoft.com/en-us/azure/aks/tutorial-kubernetes-deploy-cluster?tabs=azure-cli[AKS cluster^], and deploys the https://github.com/OpenLiberty/open-liberty-operator/releases/latest[Open Liberty Operator^] to manage your Open Liberty applications.
 
 For more information on configuring these options, refer to the https://learn.microsoft.com/en-us/azure/aks/howto-deploy-java-liberty-app?tabs=in-bash#create-a-liberty-on-aks-deployment-using-the-portal[Create a Liberty on AKS deployment using the portal] documentation.
 
