@@ -266,7 +266,7 @@ Look for output similar to the following example.
 "acr31a3a1.azurecr.io"
 ----
 
-Tag your container images with your registry by the following commands:
+Tag your container images with your registry by the following commands. Substitute your registry server name for the `[registry-server]` value.
 
 [role=command]
 ```
