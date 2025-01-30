@@ -175,7 +175,7 @@ For example, in the following screenshot, the registry name is `acrc75e71`.
 
 image::Locate_ACR.png[Locate ACR,align="center"]
 
-You will use this registry name in place of `[registry-name]` in the upcoming commands.
+Use this registry name in place of `[registry-name]` in the upcoming commands.
 
 Alternatively, if you prefer using the command line, you can retrieve the container registry information by running the following command:
 
