@@ -165,7 +165,7 @@ After you review the configurations, select **Review + create** to validate your
 
 == Uploading images to a container registry
 
-Once your Azure Container Registry (ACR) is created, you can proceed to containerize your microservices and upload their Docker images to the ACR for storage and deployment.
+Once your Azure Container Registry (ACR) is created, you can containerize your microservices and upload their Docker images to the ACR for storage and deployment.
 
 === Logging into the container registry
 
