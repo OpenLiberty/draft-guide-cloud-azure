@@ -291,7 +291,7 @@ Since your Azure Kubernetes Service (AKS) cluster is already set up, you can now
 
 === Connecting the AKS cluster to Kubernetes
 
-To manage and interact with your AKS cluster using Kubernetes, you need to integrate the AKS cluster credentials into your local Kubernetes configuration. This allows your local Kubernetes CLI (`kubectl`) to communicate with the AKS cluster for deploying and managing resources.
+To manage and interact with your AKS cluster using Kubernetes, you need to integrate the AKS cluster credentials into your local Kubernetes configuration. This integration allows your local Kubernetes CLI (`kubectl`) to communicate with the AKS cluster for deploying and managing resources.
 
 To begin, obtain the information about the Kubernetes cluster created within the `guideGroup` resource group. You can find this information by either viewing the resource group overview in the Azure Portal or running the following command:
 
