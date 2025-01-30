@@ -171,7 +171,7 @@ Once your Azure Container Registry (ACR) is created, you can containerize your m
 
 Before uploading your images, you need to log in to your Azure Container Registry (ACR). Navigate to the resource group overview in the Azure Portal and locate the container registry that was created during the deployment. You will find the registry name listed under the **Name** column.
 
-For example, in the figure below, the registry name is `acrc75e71`.
+For example, in the following screenshot, the registry name is `acrc75e71`.
 
 image::Locate_ACR.png[Locate ACR,align="center"]
 
