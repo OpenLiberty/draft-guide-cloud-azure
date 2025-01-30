@@ -141,7 +141,7 @@ To deploy your microservices to AKS with Liberty, you need to provision the nece
 
 === Creating a resource group
 
-A resource group is an Azure construct to manage a logical collection of resources for your cloud deployments on Azure. You must create a new resource group to hold and manage the resources you need for your Kubernetes deployment.
+A resource group is an Azure construct to manage a logical collection of resources for your cloud deployments on Azure. You must create a resource group to hold and manage the resources you need for your Kubernetes deployment.
 
 To create a resource group efficiently, navigate to the https://aka.ms/liberty-aks[IBM WebSphere Liberty and Open Liberty on AKS] plan and click **Create** to begin.
 
