@@ -78,7 +78,7 @@ If you already have Docker installed, make sure to have it running.
 https://azure.microsoft.com/en-us/pricing/purchase-options/pay-as-you-go/[Microsoft Azure Purchase Options^] 
 to create an account with your email and start a Pay-As-You-Go subscription. 
 
-* *IBM WebSphere Liberty and Open Liberty on AKS plan*: You will need to use the IBM WebSphere Liberty and Open Liberty on AKS plan on Azure marketplace. See the official
+* *IBM WebSphere Liberty and Open Liberty on AKS plan*: You will need to use the https://azuremarketplace.microsoft.com/en-us/marketplace/apps/ibm-usa-ny-armonk-hq-6275750-ibmcloud-aiops.20210924-liberty-aks?tab=Overview[IBM WebSphere Liberty and Open Liberty on AKS plan on Azure marketplace^]. See the official
 https://learn.microsoft.com/en-us/azure/aks/howto-deploy-java-liberty-app?tabs=in-bash#create-a-liberty-on-aks-deployment-using-the-portal[Create a Liberty on AKS deployment using the portal^] documentation for more information. Or, you can go directly to https://aka.ms/liberty-aks[the plan]. To use this plan, you must have one of the following Azure role-based access control sets: Contributor and User Access Administrator together, or Owner of the current subscription.
 
 * *Azure CLI:* You will need to use the Azure Command Line Interface (CLI). See the official
